@@ -1,0 +1,6 @@
+<div><%= link_to "View All Users", user_index_path %></div>
+<div><%= link_to "View Articles", post_index_path %></div>
+<% if current_user.can_publish? %>
+  <div><%= link_to "View All Drafted Posts", posts_drafts_path %></div>
+<% end %>
+<div><%= link_to "Create new post", new_post_path %></div>
