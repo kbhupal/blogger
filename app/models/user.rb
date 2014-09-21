@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :roles
+  has_many :permissions, :through =>  :roles
+  has_many :skills
+  has_and_belongs_to_many :jobs
+
+  accepts_nested_attributes_for :roles
+  accepts_nested_attributes_for :skills
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
@@ -9,12 +17,9 @@ class User < ActiveRecord::Base
   validates :email, presence:   true,
             format:     { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-
-  has_and_belongs_to_many :roles
-  has_many :permissions, :through =>  :roles
-  has_many :posts, :foreign_key => "owner_id"
-
-  accepts_nested_attributes_for :roles
+  VALID_PHONE_REGEX = /^(\([0-9]{3}\) |[0-9]{3}-|[0-9]{3})[0-9]{3}-[0-9]{4}$/
+  validates :phone,
+            format:     { with: VALID_PHONE_REGEX }
 
   def has_permission? perm
     self.permissions.pluck(:name).include? perm
@@ -28,7 +33,7 @@ class User < ActiveRecord::Base
     self.has_permission? "application_admin"
   end
 
-  def can_publish?
-    self.has_permission? "can_publish"
+  def can_post?
+    self.has_permission? "can_post"
   end
 end
