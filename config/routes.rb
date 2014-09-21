@@ -10,8 +10,8 @@ Blogger::Application.routes.draw do
 
   resources :user
 
-  match "posts/published", :to => "post#published"
-  match "posts/drafts", :to => "post#drafts"
+  get "posts/published", :to => "post#published"
+  get "posts/drafts", :to => "post#drafts"
   resources :post do
     get :show_post_body
     get :publish_draft
