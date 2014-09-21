@@ -8,6 +8,8 @@ class CreateJobs < ActiveRecord::Migration
       t.string    :location
       t.integer   :category_id
       t.datetime  :deadline
+
+      t.timestamps
     end
   end
 

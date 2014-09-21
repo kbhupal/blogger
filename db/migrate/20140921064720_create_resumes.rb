@@ -3,6 +3,7 @@ class CreateResumes < ActiveRecord::Migration
     create_table :resumes do |t|
       t.string    :title
       t.string    :body
+      t.integer   :owner_id
     end
   end
 
