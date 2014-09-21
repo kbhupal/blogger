@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 gem 'execjs'
 gem 'therubyracer'
-gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-sass', "~> 2.3.2"
 gem 'activeresource'
 gem 'activerecord'
 # Bundle edge Rails instead:
@@ -14,7 +14,7 @@ gem 'devise'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', github: 'rails/sass-rails'
+  gem 'sass-rails', '~> 4.0.3'
   gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
