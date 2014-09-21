@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :roles, :skills, :jobs
   has_many :permissions, :through =>  :roles
-  has_many :skills
-  has_and_belongs_to_many :jobs
+  has_one :resume, :foreign_key => :owner_id
 
   accepts_nested_attributes_for :roles
   accepts_nested_attributes_for :skills
