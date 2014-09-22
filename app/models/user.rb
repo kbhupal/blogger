@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :roles, :skills, :jobs
+  has_many :skills
+  has_and_belongs_to_many :jobs
   has_many :permissions, :through =>  :roles
   has_one :resume, :foreign_key => :owner_id
+  has_one :role
 
   accepts_nested_attributes_for :roles
   accepts_nested_attributes_for :skills
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   validates :email, presence:   true,
             format:     { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  VALID_PHONE_REGEX = /^(\([0-9]{3}\) |[0-9]{3}-|[0-9]{3})[0-9]{3}-[0-9]{4}$/
+  VALID_PHONE_REGEX = /(\([0-9]{3}\) |[0-9]{3}-|[0-9]{3})[0-9]{3}-[0-9]{4}/
   validates :phone,
             format:     { with: VALID_PHONE_REGEX }
 

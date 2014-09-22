@@ -31,4 +31,8 @@ class Admin::UsersController < Admin::ApplicationController
       redirect_to new_admin_user_path
     end
   end
+
+  def user_params
+    params.require(:user).permit()
+  end
 end
