@@ -1,4 +1,4 @@
-class PostController < ApplicationController
+class ResumeController < ApplicationController
 
   include ApplicationHelper
   skip_before_filter :authenticate_user!, :only => [:index, :show]
@@ -15,7 +15,7 @@ class PostController < ApplicationController
     post = Post.new
     @errors = []
     ActiveRecord::Base.transaction do
-      update_new_post post, params["post"]
+      update_new_post post, params["resume"]
     end
     redirect_to create_redirector_path if @errors.blank?
   end
@@ -39,7 +39,7 @@ class PostController < ApplicationController
 
   def show
     post = Post.find(params["id"].to_i)
-    render :partial => "show_post", :locals => {:post => post}
+    render :partial => "show_post", :locals => {:resume => post}
   end
 
   private
