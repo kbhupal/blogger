@@ -10,9 +10,7 @@ Blogger::Application.routes.draw do
 
   resources :user
 
-  get "posts/published", :to => "post#published"
-  get "posts/drafts", :to => "post#drafts"
-  resources :post do
+  resources :resume do
     get :show_post_body
     get :publish_draft
   end
