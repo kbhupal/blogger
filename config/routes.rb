@@ -32,7 +32,7 @@ Blogger::Application.routes.draw do
   #   resources :products do
   #     member do
   #       get 'short'
-  #       post 'toggle'
+  #       resume 'toggle'
   #     end
   #
   #     collection do

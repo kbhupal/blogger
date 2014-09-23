@@ -23,11 +23,8 @@ class User < ActiveRecord::Base
               :presence => true,
               :format =>     { with: VALID_PHONE_REGEX }
 
-  scope :get_all_employers, lambda{Role.find_by(:name => "employer").users.pluck(:name)}
-
-  def has_permission? perm
-    self.permissions.pluck(:name).include? perm
-  end
+  scope :get_all_employers, lambda{Role.find_by(:name => "Employer").users.pluck(:name)}
+  scope :get_all_jobseekers, lambda{Role.find_by(:name => "Jobseeker").users.pluck(:name)}
 
   def has_role? role
     self.roles.include? role
@@ -37,7 +34,21 @@ class User < ActiveRecord::Base
     self.has_permission? "application_admin"
   end
 
-  def can_post?
-    self.has_permission? "can_post"
+  def can_publish?
+    self.has_permission? "can_publish"
+  end
+
+  def can_apply_to_job?
+    self.has_permission? "can_apply"
+  end
+
+  private
+
+  ##
+  # Function: Checks the permissions of the user against the requested permissions
+  # Returns: TRUE if permission exists else FALSE
+  ##
+  def has_permission? perm
+    self.permissions.pluck(:name).include? perm
   end
 end
