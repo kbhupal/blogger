@@ -2,11 +2,12 @@ Blogger::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :sessions=>"sessions"}
 
   root :to => "home#index"
-
   resources :job do
+    get "/my_jobs" => :my_jobs, :on => :collection
     get :autocomplete_category_name, :on => :collection
     get "/apply" => :apply
   end
+
 
   namespace :admin do
     resources :home , :only => [:index]
