@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
+//= require turbolinks
 //= require bootstrap
 //= require bootstrap-modal
+//= require autocomplete-rails
 //= require popup
 //= require_tree .

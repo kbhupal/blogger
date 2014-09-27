@@ -3,9 +3,16 @@ Blogger::Application.routes.draw do
 
   root :to => "home#index"
 
+  resources :job do
+    get :autocomplete_category_name, :on => :collection
+    get "/apply" => :apply
+  end
+
   namespace :admin do
     resources :home , :only => [:index]
-    resources :users
+    resources :users do
+      get :autocomplete_role_name, :on => :collection
+    end
   end
 
   resources :user
@@ -14,6 +21,7 @@ Blogger::Application.routes.draw do
     get :show_post_body
     get :publish_draft
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

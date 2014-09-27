@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :skills
-  has_and_belongs_to_many :jobs
+  has_and_belongs_to_many :jobs, :through => "JobApplications"
   has_many :permissions, :through =>  :roles
   has_one :resume, :foreign_key => :owner_id
   has_and_belongs_to_many :roles
@@ -26,23 +26,30 @@ class User < ActiveRecord::Base
   scope :get_all_employers, lambda{Role.find_by(:name => "Employer").users.pluck(:name)}
   scope :get_all_jobseekers, lambda{Role.find_by(:name => "Jobseeker").users.pluck(:name)}
 
-  def has_role? role
-    self.roles.include? role
-  end
 
   def is_admin?
     self.has_permission? "application_admin"
   end
 
-  def can_publish?
+  def is_employer?
     self.has_permission? "can_publish"
+  end
+
+  def is_jobseeker?
+    self.has_permission? "can_apply"
+  end
+
+  def has_role? role
+    self.roles.include? role
+  end
+
+  def can_publish?
+      self.has_permission? "can_publish"
   end
 
   def can_apply_to_job?
     self.has_permission? "can_apply"
   end
-
-  private
 
   ##
   # Function: Checks the permissions of the user against the requested permissions

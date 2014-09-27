@@ -24,6 +24,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'rails4-autocomplete', '~> 1.1.1'
+gem 'jquery-ui-rails'
+gem 'turbolinks'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

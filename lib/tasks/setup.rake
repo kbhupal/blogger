@@ -11,7 +11,7 @@ task :setup_sample_application => [:environment] do
   end
 
   Role.find_by(:name => "Admin").permissions << Permission.all
-  Role.find_by(:name => "Editor").permissions << Permission.find_by(:name => "can_publish")
+  Role.find_by(:name => "Employer").permissions << Permission.find_by(:name => "can_publish")
   Role.find_by(:name => "Jobseeker").permissions << Permission.find_by(:name => "can_apply")
 
   # Create Dummy Admin User
