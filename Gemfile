@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.6'
 gem 'execjs'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'bootstrap-sass', "~> 2.3.2"
 gem 'activeresource'
 gem 'activerecord'
@@ -10,6 +10,7 @@ gem 'activerecord'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'mysql2'
 gem 'devise'
+gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,10 +24,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 gem 'jquery-rails'
-gem 'rails4-autocomplete', '~> 1.1.1'
-gem 'jquery-ui-rails'
-gem 'turbolinks'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

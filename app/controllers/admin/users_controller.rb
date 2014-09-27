@@ -1,9 +1,6 @@
 class Admin::UsersController < Admin::ApplicationController
 
-  autocomplete :role, :name, :full => true
-
   def index
-    @users = User.all
   end
 
   def new
@@ -14,7 +11,7 @@ class Admin::UsersController < Admin::ApplicationController
     user = User.new
     @errors = []
     ActiveRecord::Base.transaction do
-      update_new_user user, user_params
+      update_new_user user, params["user"]
     end
     redirect_to admin_home_index_path if @errors.blank?
   end
@@ -22,18 +19,10 @@ class Admin::UsersController < Admin::ApplicationController
   private
 
   def update_new_user user, new_user_hash
-    role_hash = new_user_hash["role"]
-    new_user_hash = new_user_hash.slice!("role")
-    puts "##############################################################################################################\n"
-    puts new_user_hash
-    puts "##############################################################################################################"
     user.update_attributes(new_user_hash)
-
-
-
     if user.errors.blank?
       user.save!
-      user.roles << Role.find(role_hash[:id])
+      user.roles << Role.find_by_name("Editor")
     else
       @errors = user.errors.full_messages
       @errors.each do |e|
@@ -44,10 +33,6 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name,  :phone, :email, :password, :password_confirmation, {:role => [:id, :role]})
+    params.require(:user).permit()
   end
-
-  # def role_params
-  #   params.require(:role).permit(:id, :name)
-  # end
 end

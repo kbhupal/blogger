@@ -1,3 +1,4 @@
+
 class Resume < ActiveRecord::Base
   belongs_to :users
   validates :title, :presence => true, :length => {:maximum => 128}

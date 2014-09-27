@@ -2,18 +2,10 @@ Blogger::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :sessions=>"sessions"}
 
   root :to => "home#index"
-  resources :job do
-    get "/my_jobs" => :my_jobs, :on => :collection
-    get :autocomplete_category_name, :on => :collection
-    get "/apply" => :apply
-  end
-
 
   namespace :admin do
     resources :home , :only => [:index]
-    resources :users do
-      get :autocomplete_role_name, :on => :collection
-    end
+    resources :users
   end
 
   resources :user
@@ -22,7 +14,6 @@ Blogger::Application.routes.draw do
     get :show_post_body
     get :publish_draft
   end
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

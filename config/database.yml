@@ -5,7 +5,7 @@ development:
  database: study_db
  pool: 5
  username: root
- password: root
+ password: 
 
 test:
  adapter: mysql2
@@ -14,7 +14,7 @@ test:
  database: study_db_test
  pool: 5
  username: root
- password: root
+ password: 
 # socket: /var/lib/mysql/mysql.sock
 
 production:
@@ -24,4 +24,4 @@ production:
  database: study_db_test
  pool: 50
  username: root
- password: root
+ password: 
